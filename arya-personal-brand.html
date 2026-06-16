@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Arya — Creator, Cricket Enthusiast & Digital Innovator. Official personal brand website.">
+<meta name="keywords" content="Arya, cricket, content creator, digital innovator, factlust, Instagram">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Arya — Creator, Cricket Enthusiast & Digital Innovator">
+<meta property="og:description" content="Welcome to Arya's official personal brand hub.">
+<meta property="og:type" content="website">
+<title>Arya — Creator, Cricket Enthusiast & Digital Innovator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg-void:      #050508;
+  --bg-deep:      #0a0a1a;
+  --bg-mid:       #0f0f24;
+  --indigo:       #6C63FF;
+  --indigo-light: #8B85FF;
+  --cyan:         #00F5FF;
+  --cyan-dim:     #00C4CC;
+  --gold:         #FFD700;
+  --gold-dim:     #CC9900;
+  --white:        #F0F0FF;
+  --white-dim:    #A0A0C0;
+  --glass-bg:     rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-hover:  rgba(255,255,255,0.08);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+  --radius-sm:    8px;
+  --radius-md:    16px;
+  --radius-lg:    24px;
+  --radius-xl:    36px;
+  --transition:   cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg-void);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: none; }
+::selection { background: var(--indigo); color: #fff; }
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor-outer {
+  position: fixed; width: 40px; height: 40px;
+  border: 1.5px solid var(--cyan); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .3s var(--transition), height .3s var(--transition),
+              border-color .3s ease, background .3s ease;
+  mix-blend-mode: screen;
+}
+#cursor-inner {
+  position: fixed; width: 6px; height: 6px;
+  background: var(--cyan); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform .1s ease;
+}
+body:hover #cursor-outer { opacity: 1; }
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { background: var(--indigo); border-radius: 4px; }
+
+/* ============================================================
+   NOISE OVERLAY
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1; opacity: .4;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(5,5,8,0.6);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--glass-border);
+  transition: padding .4s var(--transition), background .4s ease;
+}
+nav.scrolled { padding: 12px 5vw; background: rgba(5,5,8,0.9); }
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--indigo));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; letter-spacing: -.02em;
+}
+.nav-links {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+.nav-links a {
+  font-size: .875rem; font-weight: 500; letter-spacing: .04em;
+  color: var(--white-dim);
+  transition: color .25s ease;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--cyan);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s var(--transition);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  padding: 10px 22px; border-radius: 100px;
+  background: linear-gradient(135deg, var(--indigo), var(--cyan));
+  font-size: .8rem; font-weight: 600; letter-spacing: .06em;
+  color: #fff; border: none;
+  transition: transform .3s var(--transition), box-shadow .3s ease;
+}
+.nav-cta:hover { transform: scale(1.04); box-shadow: 0 0 30px rgba(108,99,255,.5); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white); border-radius: 2px;
+  transition: .3s var(--transition);
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+#hero {
+  position: relative; height: 100vh; min-height: 700px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+#hero-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.hero-glow-ring {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.glow-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(108,99,255,.25) 0%, transparent 70%);
+  top: -100px; left: -200px; animation: glow-drift 8s ease-in-out infinite alternate;
+}
+.glow-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,245,255,.15) 0%, transparent 70%);
+  bottom: -150px; right: -100px; animation: glow-drift 10s ease-in-out infinite alternate-reverse;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 0 5vw;
+  max-width: 1000px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: .7rem;
+  letter-spacing: .2em; color: var(--cyan);
+  text-transform: uppercase; margin-bottom: 2rem;
+  padding: 6px 16px; border: 1px solid rgba(0,245,255,.3);
+  border-radius: 100px; background: rgba(0,245,255,.05);
+  opacity: 0; transform: translateY(20px);
+  animation: fade-up .8s var(--transition) .2s forwards;
+}
+.hero-eyebrow::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--cyan); border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 700; line-height: 1.05; letter-spacing: -.03em;
+  margin-bottom: 1.5rem;
+  opacity: 0; transform: translateY(30px);
+  animation: fade-up .9s var(--transition) .4s forwards;
+}
+.hero-headline .grad {
+  background: linear-gradient(135deg, var(--white) 20%, var(--indigo-light) 50%, var(--cyan) 80%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.typing-container {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 400; color: var(--white-dim);
+  margin-bottom: 2.5rem; min-height: 2.2em;
+  opacity: 0; transform: translateY(20px);
+  animation: fade-up .8s var(--transition) .6s forwards;
+}
+.typing-text { color: var(--cyan); font-weight: 600; }
+.typing-cursor {
+  display: inline-block; width: 2px; height: 1.1em;
+  background: var(--cyan); margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+.hero-buttons {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  opacity: 0; transform: translateY(20px);
+  animation: fade-up .8s var(--transition) .8s forwards;
+}
+.btn-primary {
+  padding: 16px 36px; border-radius: 100px;
+  background: linear-gradient(135deg, var(--indigo), var(--cyan));
+  color: #fff; font-weight: 600; font-size: .95rem;
+  border: none; letter-spacing: .03em;
+  position: relative; overflow: hidden;
+  transition: transform .3s var(--transition), box-shadow .3s ease;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--cyan), var(--indigo));
+  opacity: 0; transition: opacity .4s ease;
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 40px rgba(108,99,255,.5); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-secondary {
+  padding: 16px 36px; border-radius: 100px;
+  background: var(--glass-bg); color: var(--white);
+  font-weight: 600; font-size: .95rem; letter-spacing: .03em;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  transition: transform .3s var(--transition), border-color .3s ease, background .3s ease;
+}
+.btn-secondary:hover {
+  transform: translateY(-3px); border-color: var(--indigo);
+  background: rgba(108,99,255,.12);
+}
+.scroll-indicator {
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fade-up .8s var(--transition) 1.2s forwards;
+}
+.scroll-indicator span {
+  font-family: var(--font-mono); font-size: .65rem;
+  letter-spacing: .15em; color: var(--white-dim); text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--white-dim), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   SECTION COMMONS
+   ============================================================ */
+section { position: relative; overflow: hidden; }
+.section-inner { max-width: 1200px; margin: 0 auto; padding: 100px 5vw; }
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: .68rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 1rem;
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; letter-spacing: -.025em;
+  line-height: 1.1; margin-bottom: 1rem;
+}
+.section-sub {
+  font-size: 1.05rem; color: var(--white-dim);
+  line-height: 1.7; max-width: 560px;
+}
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s var(--transition), transform .8s var(--transition); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .8s var(--transition), transform .8s var(--transition); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .8s var(--transition), transform .8s var(--transition); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* Glassmorphism card */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  transition: transform .4s var(--transition), border-color .4s ease, box-shadow .4s ease;
+}
+.glass-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(108,99,255,.35);
+  box-shadow: 0 20px 60px rgba(108,99,255,.12);
+}
+
+/* Divider glow */
+.divider {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, var(--indigo), var(--cyan));
+  border-radius: 3px; margin-bottom: 2rem;
+}
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+#about { background: linear-gradient(180deg, var(--bg-void) 0%, var(--bg-deep) 100%); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 4rem; align-items: center;
+}
+.profile-card {
+  position: relative; padding: 40px;
+}
+.avatar-ring {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--indigo), var(--cyan));
+  padding: 3px; margin: 0 auto 1.5rem;
+  position: relative;
+}
+.avatar-ring::before {
+  content: ''; position: absolute;
+  inset: -6px; border-radius: 50%;
+  border: 1px dashed rgba(108,99,255,.4);
+  animation: spin 12s linear infinite;
+}
+.avatar-inner {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: var(--bg-deep);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+}
+.profile-name {
+  font-family: var(--font-display); font-size: 1.6rem;
+  font-weight: 700; text-align: center; margin-bottom: .25rem;
+}
+.profile-handle {
+  font-family: var(--font-mono); font-size: .8rem;
+  color: var(--cyan); text-align: center; margin-bottom: 1.5rem;
+}
+.profile-bio {
+  font-size: .95rem; line-height: 1.75;
+  color: var(--white-dim); text-align: center; margin-bottom: 2rem;
+}
+.stats-row {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+}
+.stat-box {
+  text-align: center; padding: 16px 10px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+}
+.stat-num {
+  font-family: var(--font-display); font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label {
+  font-size: .7rem; color: var(--white-dim);
+  text-transform: uppercase; letter-spacing: .1em; margin-top: 2px;
+}
+.about-text-col {}
+.about-tagline {
+  font-family: var(--font-display); font-size: 1.1rem;
+  color: var(--cyan); margin-bottom: 1.5rem; font-weight: 500;
+}
+.about-para {
+  font-size: 1rem; line-height: 1.8; color: var(--white-dim); margin-bottom: 1.2rem;
+}
+
+/* Timeline */
+.timeline { margin-top: 2.5rem; position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 14px; top: 0; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--indigo), transparent);
+}
+.tl-item {
+  display: flex; gap: 1.5rem;
+  padding: 0 0 1.8rem 0;
+  position: relative;
+}
+.tl-dot {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--indigo);
+  background: var(--bg-void);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; color: var(--cyan);
+  position: relative; z-index: 1;
+  transition: background .3s ease, box-shadow .3s ease;
+}
+.tl-item:hover .tl-dot {
+  background: var(--indigo);
+  box-shadow: 0 0 20px rgba(108,99,255,.6);
+}
+.tl-year {
+  font-family: var(--font-mono); font-size: .7rem;
+  color: var(--gold); letter-spacing: .1em;
+}
+.tl-title {
+  font-family: var(--font-display); font-size: 1rem;
+  font-weight: 600; margin: .2rem 0;
+}
+.tl-desc { font-size: .875rem; color: var(--white-dim); line-height: 1.6; }
+
+/* ============================================================
+   SKILLS SECTION
+   ============================================================ */
+#skills { background: var(--bg-deep); }
+.skills-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+  margin-top: 3rem;
+}
+.skill-card {
+  padding: 32px 28px;
+  position: relative; overflow: hidden;
+}
+.skill-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 60%, var(--indigo) 200%);
+  opacity: 0; transition: opacity .4s ease;
+}
+.skill-card:hover::before { opacity: .07; }
+.skill-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.skill-title {
+  font-family: var(--font-display); font-size: 1.1rem;
+  font-weight: 700; margin-bottom: .75rem;
+}
+.skill-desc { font-size: .875rem; color: var(--white-dim); line-height: 1.65; margin-bottom: 1.5rem; }
+.skill-meter-wrap { display: flex; flex-direction: column; gap: 10px; }
+.skill-bar-row { display: flex; flex-direction: column; gap: 5px; }
+.skill-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: .72rem; color: var(--white-dim);
+}
+.skill-bar-track {
+  height: 4px; background: rgba(255,255,255,.08);
+  border-radius: 4px; overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--indigo), var(--cyan));
+  width: 0; transition: width 1.4s var(--transition);
+}
+
+/* ============================================================
+   GALLERY SECTION
+   ============================================================ */
+#gallery { background: var(--bg-void); }
+.gallery-grid {
+  columns: 3 280px; column-gap: 1rem;
+  margin-top: 3rem;
+}
+.gallery-item {
+  break-inside: avoid; margin-bottom: 1rem;
+  border-radius: var(--radius-md); overflow: hidden;
+  position: relative; cursor: none;
+}
+.gallery-item .gallery-img {
+  width: 100%; display: block;
+  transition: transform .6s var(--transition);
+  border-radius: var(--radius-md);
+  background: var(--bg-mid);
+  aspect-ratio: var(--ar, 1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+}
+.gallery-item:hover .gallery-img { transform: scale(1.04); }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,5,8,.8) 0%, transparent 60%);
+  opacity: 0; transition: opacity .4s ease;
+  border-radius: var(--radius-md);
+  display: flex; align-items: flex-end; padding: 20px;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption { font-size: .8rem; font-weight: 600; color: var(--white); }
+
+/* ============================================================
+   PROJECTS SECTION
+   ============================================================ */
+#projects { background: var(--bg-deep); }
+.filter-bar {
+  display: flex; gap: .75rem; flex-wrap: wrap;
+  margin: 2rem 0 2.5rem;
+}
+.filter-btn {
+  padding: 8px 20px; border-radius: 100px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  color: var(--white-dim); font-size: .8rem; font-weight: 500;
+  transition: all .3s ease;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--indigo); border-color: var(--indigo);
+  color: #fff;
+}
+.projects-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
+  gap: 1.5rem;
+}
+.project-card {
+  padding: 0; overflow: hidden;
+}
+.project-header {
+  padding: 28px 28px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.project-tag {
+  font-family: var(--font-mono); font-size: .65rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px;
+  background: rgba(108,99,255,.15); color: var(--indigo-light);
+  border: 1px solid rgba(108,99,255,.25);
+}
+.project-arrow {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem;
+  transition: all .3s ease;
+}
+.project-card:hover .project-arrow {
+  background: var(--indigo); border-color: var(--indigo);
+  transform: rotate(45deg);
+}
+.project-img {
+  width: calc(100% - 56px); margin: 0 28px 20px;
+  border-radius: var(--radius-md);
+  background: var(--bg-mid);
+  height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+  overflow: hidden; position: relative;
+}
+.project-img-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(108,99,255,.2), rgba(0,245,255,.1));
+}
+.project-body { padding: 0 28px 28px; }
+.project-title {
+  font-family: var(--font-display); font-size: 1.1rem;
+  font-weight: 700; margin-bottom: .5rem;
+}
+.project-desc { font-size: .875rem; color: var(--white-dim); line-height: 1.65; }
+
+/* ============================================================
+   COMMUNITY SECTION
+   ============================================================ */
+#community { background: var(--bg-void); }
+.community-hero-card {
+  text-align: center; padding: 60px 40px;
+  background: linear-gradient(135deg, rgba(108,99,255,.12), rgba(0,245,255,.06));
+  border: 1px solid rgba(108,99,255,.25);
+  border-radius: var(--radius-xl);
+  margin-bottom: 3rem; position: relative; overflow: hidden;
+}
+.community-hero-card::before {
+  content: ''; position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(108,99,255,.2) 0%, transparent 70%);
+  top: -100px; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+}
+.community-big-num {
+  font-family: var(--font-display); font-size: clamp(3rem,8vw,6rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1;
+}
+.community-big-label {
+  font-size: 1.2rem; color: var(--white-dim); margin-top: .5rem; margin-bottom: 2rem;
+}
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem;
+}
+.testimonial-card {
+  padding: 24px; position: relative;
+}
+.testimonial-card::before {
+  content: '"'; position: absolute;
+  top: 16px; left: 20px;
+  font-size: 4rem; font-family: Georgia, serif;
+  color: rgba(108,99,255,.25); line-height: 1;
+}
+.t-text {
+  font-size: .9rem; color: var(--white-dim);
+  line-height: 1.7; margin-bottom: 1rem; padding-top: 1.2rem;
+}
+.t-author { display: flex; align-items: center; gap: 10px; }
+.t-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--indigo), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; flex-shrink: 0;
+}
+.t-name { font-weight: 600; font-size: .875rem; }
+.t-handle { font-size: .75rem; color: var(--cyan); }
+
+/* Social proof row */
+.social-proof-row {
+  display: flex; gap: 1.2rem; flex-wrap: wrap;
+  justify-content: center; margin-top: 2.5rem;
+}
+.social-proof-card {
+  padding: 20px 28px; border-radius: var(--radius-md);
+  display: flex; align-items: center; gap: 12px;
+  flex: 1; min-width: 160px; max-width: 220px;
+}
+.sp-icon { font-size: 1.6rem; }
+.sp-num {
+  font-family: var(--font-display); font-size: 1.3rem;
+  font-weight: 700; color: var(--white);
+}
+.sp-label { font-size: .72rem; color: var(--white-dim); }
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+#cta-channel {
+  background: linear-gradient(135deg, rgba(108,99,255,.15) 0%, rgba(0,245,255,.08) 100%);
+  border-top: 1px solid rgba(108,99,255,.2);
+  border-bottom: 1px solid rgba(108,99,255,.2);
+}
+.cta-inner {
+  text-align: center; padding: 100px 5vw;
+  max-width: 800px; margin: 0 auto;
+}
+.cta-rocket { font-size: 3rem; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
+.cta-heading {
+  font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem);
+  font-weight: 700; letter-spacing: -.025em; margin-bottom: 1rem;
+}
+.cta-sub {
+  font-size: 1.1rem; color: var(--white-dim);
+  line-height: 1.7; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.btn-channel {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 44px; border-radius: 100px;
+  background: linear-gradient(135deg, var(--indigo) 0%, var(--cyan) 100%);
+  color: #fff; font-weight: 700; font-size: 1rem; letter-spacing: .04em;
+  border: none;
+  position: relative; overflow: hidden;
+  transition: transform .3s var(--transition), box-shadow .4s ease;
+  box-shadow: 0 0 0 0 rgba(108,99,255,.5);
+}
+.btn-channel::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--cyan), var(--indigo));
+  opacity: 0; transition: opacity .4s ease;
+}
+.btn-channel:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 50px rgba(108,99,255,.55);
+}
+.btn-channel:hover::before { opacity: 1; }
+.btn-channel span { position: relative; z-index: 1; }
+.btn-channel .icon { position: relative; z-index: 1; font-size: 1.2rem; }
+.channel-meta {
+  margin-top: 1.5rem; font-size: .85rem;
+  color: var(--white-dim); display: flex; align-items: center;
+  justify-content: center; gap: .5rem;
+}
+.channel-meta a { color: var(--cyan); }
+
+/* ============================================================
+   WHATS COMING SECTION
+   ============================================================ */
+#whats-coming { background: var(--bg-deep); }
+.coming-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem;
+  margin-top: 3rem;
+}
+.coming-card {
+  padding: 32px; position: relative; overflow: hidden;
+}
+.coming-card::after {
+  content: ''; position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,99,255,.12) 0%, transparent 70%);
+  bottom: -80px; right: -60px;
+  pointer-events: none;
+}
+.coming-icon { font-size: 2rem; margin-bottom: 1rem; }
+.coming-title {
+  font-family: var(--font-display); font-size: 1.1rem;
+  font-weight: 700; margin-bottom: .75rem;
+}
+.coming-desc { font-size: .875rem; color: var(--white-dim); line-height: 1.7; }
+.coming-badge {
+  display: inline-block; margin-top: 1rem;
+  font-family: var(--font-mono); font-size: .65rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px;
+  background: rgba(255,215,0,.1); color: var(--gold);
+  border: 1px solid rgba(255,215,0,.25);
+}
+.coming-banner {
+  margin-top: 2.5rem; padding: 28px 36px;
+  background: linear-gradient(135deg, rgba(108,99,255,.1), rgba(0,245,255,.06));
+  border: 1px solid rgba(0,245,255,.2);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+.coming-banner p { font-size: 1rem; line-height: 1.7; color: var(--white-dim); }
+.coming-banner strong { color: var(--cyan); }
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+#contact { background: var(--bg-void); }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start;
+}
+.contact-info h3 {
+  font-family: var(--font-display); font-size: 1.4rem;
+  font-weight: 700; margin-bottom: 1rem;
+}
+.contact-info p { font-size: .95rem; color: var(--white-dim); line-height: 1.8; margin-bottom: 2rem; }
+.contact-links { display: flex; flex-direction: column; gap: .85rem; }
+.contact-link-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: var(--radius-md);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  color: var(--white); font-size: .875rem;
+  transition: all .3s ease;
+}
+.contact-link-item:hover { border-color: var(--indigo); background: rgba(108,99,255,.08); }
+.contact-link-item .cl-icon { font-size: 1.2rem; }
+.cl-text-label { font-size: .7rem; color: var(--white-dim); }
+.cl-text-val { font-weight: 600; color: var(--white); }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-field { display: flex; flex-direction: column; gap: .4rem; }
+.form-field label {
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--white-dim);
+}
+.form-field input, .form-field textarea, .form-field select {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  color: var(--white); font-family: var(--font-body);
+  font-size: .9rem; padding: 14px 16px;
+  outline: none; resize: none;
+  transition: border-color .3s ease, box-shadow .3s ease;
+  -webkit-appearance: none;
+}
+.form-field input::placeholder, .form-field textarea::placeholder {
+  color: rgba(160,160,192,.4);
+}
+.form-field input:focus, .form-field textarea:focus {
+  border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(108,99,255,.15);
+}
+.form-field textarea { min-height: 120px; }
+.btn-submit {
+  padding: 16px 36px; border-radius: 100px;
+  background: linear-gradient(135deg, var(--indigo), var(--cyan));
+  color: #fff; font-weight: 700; font-size: .95rem;
+  border: none; align-self: flex-start;
+  transition: transform .3s var(--transition), box-shadow .3s ease;
+}
+.btn-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(108,99,255,.5); }
+.form-success {
+  display: none; text-align: center; padding: 40px;
+  font-size: 1rem; color: var(--cyan);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--bg-void);
+  border-top: 1px solid var(--glass-border);
+  padding: 60px 5vw 30px;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3rem;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: var(--font-display); font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--indigo));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: .75rem;
+}
+.footer-tagline {
+  font-size: .875rem; color: var(--white-dim); line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.footer-socials { display: flex; gap: .75rem; flex-wrap: wrap; }
+.footer-social {
+  width: 38px; height: 38px; border-radius: var(--radius-sm);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  transition: all .3s ease;
+}
+.footer-social:hover { border-color: var(--indigo); background: rgba(108,99,255,.15); transform: translateY(-3px); }
+.footer-col h4 {
+  font-family: var(--font-display); font-size: .875rem;
+  font-weight: 700; letter-spacing: .05em; margin-bottom: 1.2rem;
+  text-transform: uppercase; color: var(--white-dim);
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+.footer-col ul a {
+  font-size: .875rem; color: var(--white-dim);
+  transition: color .25s ease;
+}
+.footer-col ul a:hover { color: var(--cyan); }
+.footer-bottom {
+  border-top: 1px solid var(--glass-border);
+  padding-top: 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: .5rem;
+}
+.footer-copy { font-size: .78rem; color: var(--white-dim); }
+.footer-love { font-size: .78rem; color: var(--white-dim); }
+.footer-love span { color: var(--cyan); }
+
+/* ============================================================
+   FLOATING ELEMENTS
+   ============================================================ */
+.float-el {
+  position: fixed; pointer-events: none; z-index: 0;
+  border-radius: 50%; filter: blur(1px);
+  animation: float-random linear infinite;
+  opacity: .15;
+}
+
+/* ============================================================
+   PAGE LOADER
+   ============================================================ */
+#page-loader {
+  position: fixed; inset: 0;
+  background: var(--bg-void);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1.5rem;
+  transition: opacity .6s ease, visibility .6s ease;
+}
+#page-loader.hidden { opacity: 0; visibility: hidden; }
+.loader-logo {
+  font-family: var(--font-display); font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--indigo));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.loader-bar-track {
+  width: 200px; height: 2px;
+  background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--indigo), var(--cyan));
+  border-radius: 2px;
+  animation: load-progress 1.5s ease forwards;
+}
+@keyframes load-progress { from { width: 0; } to { width: 100%; } }
+
+/* ============================================================
+   MOUSE-FOLLOWING GRADIENT
+   ============================================================ */
+#mouse-glow {
+  position: fixed; width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,99,255,.08) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  transform: translate(-50%,-50%);
+  transition: transform .12s ease;
+}
+
+/* ============================================================
+   MOBILE NAV
+   ============================================================ */
+.mobile-menu {
+  position: fixed; inset: 0;
+  background: rgba(5,5,8,.97);
+  backdrop-filter: blur(20px);
+  z-index: 99; display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem; opacity: 0; visibility: hidden;
+  transition: opacity .4s ease, visibility .4s ease;
+}
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu a {
+  font-family: var(--font-display); font-size: 2rem;
+  font-weight: 700; color: var(--white);
+  transition: color .25s ease;
+}
+.mobile-menu a:hover { color: var(--cyan); }
+.menu-close {
+  position: absolute; top: 24px; right: 24px;
+  background: none; border: none; color: var(--white);
+  font-size: 2rem; line-height: 1;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes glow-drift {
+  to { transform: translate(40px, 20px); }
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.4); }
+}
+@keyframes scroll-pulse {
+  0%,100% { transform: scaleY(1); opacity: .6; }
+  50% { transform: scaleY(.5); opacity: 1; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float-random {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .coming-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .gallery-grid { columns: 2; }
+  .social-proof-row { flex-direction: column; align-items: center; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { columns: 1; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Page Loader -->
+<div id="page-loader">
+  <div class="loader-logo">Arya.</div>
+  <div class="loader-bar-track"><div class="loader-bar"></div></div>
+</div>
+
+<!-- Custom Cursor -->
+<div id="cursor-outer"></div>
+<div id="cursor-inner"></div>
+
+<!-- Mouse glow -->
+<div id="mouse-glow"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="menu-close" id="menuClose">✕</button>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#projects">Projects</a>
+  <a href="#community">Community</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-logo">Arya.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.open('https://www.instagram.com/factlustt','_blank','noopener,noreferrer')">Follow Me</button>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============================================================ HERO ============================================================ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow-ring glow-1"></div>
+  <div class="hero-glow-ring glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Welcome to my world</div>
+    <h1 class="hero-headline">
+      <span class="grad">Arya</span><br>
+      Creator, Cricket Enthusiast<br>&amp; Digital Innovator
+    </h1>
+    <div class="typing-container">
+      I am passionate about&nbsp;<span class="typing-text" id="typing-text"></span><span class="typing-cursor"></span>
+    </div>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <span>Explore My Journey</span>
+      </button>
+      <button class="btn-secondary" onclick="window.open('https://www.instagram.com/factlustt','_blank','noopener,noreferrer')">
+        Visit My Channel ↗
+      </button>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================ ABOUT ============================================================ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <div class="glass-card profile-card">
+          <div class="avatar-ring">
+            <div class="avatar-inner">🏏</div>
+          </div>
+          <div class="profile-name">Arya</div>
+          <div class="profile-handle">@factlustt</div>
+          <div class="profile-bio">Creator. Cricketer. Innovator. Turning passion into digital stories that inspire millions.</div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-num" data-target="120">0</div>
+              <div class="stat-label">K+ Followers</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" data-target="500">0</div>
+              <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" data-target="8">0</div>
+              <div class="stat-label">M+ Reach</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="section-tag">// About Me</div>
+        <div class="divider"></div>
+        <h2 class="section-heading">The Story Behind the Screen</h2>
+        <p class="about-tagline">Where cricket passion meets digital creativity.</p>
+        <p class="about-para">I'm Arya — a content creator who lives and breathes cricket while building digital experiences that connect communities. My journey started on the pitch and evolved into a mission to share knowledge, entertainment, and authentic stories with the world.</p>
+        <p class="about-para">Through <strong>@factlustt</strong> on Instagram, I blend cricket insights, fun facts, and digital innovation into content that resonates with fans and tech enthusiasts alike. Every post is crafted with intention, passion, and a commitment to quality.</p>
+        <div class="timeline">
+          <div class="tl-item reveal" style="transition-delay:.1s">
+            <div class="tl-dot">⚡</div>
+            <div>
+              <div class="tl-year">2021</div>
+              <div class="tl-title">The First Post</div>
+              <div class="tl-desc">Started sharing cricket insights and fun facts on Instagram. The community response was immediate and overwhelming.</div>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:.2s">
+            <div class="tl-dot">🏏</div>
+            <div>
+              <div class="tl-year">2022</div>
+              <div class="tl-title">10K Milestone</div>
+              <div class="tl-desc">Crossed the first major follower milestone, proving that authentic cricket content resonates deeply with fans.</div>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:.3s">
+            <div class="tl-dot">🚀</div>
+            <div>
+              <div class="tl-year">2023</div>
+              <div class="tl-title">Going Viral</div>
+              <div class="tl-desc">Multiple reels crossed 1M+ views. Factlust became synonymous with premium cricket content in the community.</div>
+            </div>
+          </div>
+          <div class="tl-item reveal" style="transition-delay:.4s">
+            <div class="tl-dot">🌟</div>
+            <div>
+              <div class="tl-year">2024–Now</div>
+              <div class="tl-title">Digital Innovation</div>
+              <div class="tl-desc">Expanding into long-form content, collabs, and building the most engaged cricket community online.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ SKILLS ============================================================ -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <div class="section-tag">// Skills & Passions</div>
+      <div class="divider" style="margin:1rem auto 1.5rem"></div>
+      <h2 class="section-heading">What Drives Me</h2>
+      <p class="section-sub" style="margin:0 auto">From the cricket field to the camera lens — here's where my energy lives.</p>
+    </div>
+    <div class="skills-grid">
+      <!-- Cricket -->
+      <div class="glass-card skill-card reveal" style="transition-delay:.1s">
+        <div class="skill-icon">🏏</div>
+        <div class="skill-title">Cricket</div>
+        <div class="skill-desc">Deep love for the game — from Test matches to T20 format, covering every dimension of cricket with expert analysis and fan enthusiasm.</div>
+        <div class="skill-meter-wrap">
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Match Analysis</span><span>96%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="96"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Stats & History</span><span>92%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Trivia & Facts</span><span>98%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="98"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Content Creation -->
+      <div class="glass-card skill-card reveal" style="transition-delay:.2s">
+        <div class="skill-icon">🎬</div>
+        <div class="skill-title">Content Creation</div>
+        <div class="skill-desc">Crafting viral reels, captivating stories, and scroll-stopping posts that blend entertainment with education for maximum impact.</div>
+        <div class="skill-meter-wrap">
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Video Editing</span><span>90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Storytelling</span><span>94%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="94"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Community Mgmt</span><span>88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Digital Innovation -->
+      <div class="glass-card skill-card reveal" style="transition-delay:.3s">
+        <div class="skill-icon">💡</div>
+        <div class="skill-title">Digital Innovation</div>
+        <div class="skill-desc">Leveraging emerging platforms, trends, and technologies to stay ahead of the curve and deliver next-generation digital experiences.</div>
+        <div class="skill-meter-wrap">
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Social Strategy</span><span>93%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="93"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Trend Analysis</span><span>89%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="89"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Brand Building</span><span>91%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="91"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ GALLERY ============================================================ -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">// Gallery</div>
+      <div class="divider"></div>
+      <h2 class="section-heading">Moments & Highlights</h2>
+      <p class="section-sub">A visual story of cricket passion and digital creativity.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal" style="--ar:1.1; transition-delay:.05s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(108,99,255,.15),rgba(0,245,255,.08))">🏆</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Trophy Moments</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--ar:1.6; transition-delay:.1s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(108,99,255,.08))">🏏</div>
+        <div class="gallery-overlay"><span class="gallery-caption">On The Pitch</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--ar:.9; transition-delay:.15s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(0,245,255,.12),rgba(108,99,255,.06))">📱</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Content Studio</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--ar:1.3; transition-delay:.2s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(108,99,255,.18),rgba(255,215,0,.05))">🌟</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Milestones</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--ar:.85; transition-delay:.25s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(0,245,255,.15),rgba(255,215,0,.08))">🎯</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Perfect Shots</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--ar:1.4; transition-delay:.3s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(0,245,255,.1))">👥</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Community Events</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--ar:1.1; transition-delay:.35s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(108,99,255,.1),rgba(0,245,255,.15))">🎬</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Behind The Lens</span></div>
+      </div>
+      <div class="gallery-item reveal" style="--ar:1.5; transition-delay:.4s">
+        <div class="gallery-img" style="font-size:3.5rem;background:linear-gradient(135deg,rgba(0,245,255,.08),rgba(108,99,255,.2))">🔥</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Viral Moments</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PROJECTS ============================================================ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">// Content & Projects</div>
+      <div class="divider"></div>
+      <h2 class="section-heading">Featured Work</h2>
+      <p class="section-sub">Handpicked highlights from the Factlust universe.</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterProjects('all',this)">All</button>
+      <button class="filter-btn" onclick="filterProjects('cricket',this)">Cricket</button>
+      <button class="filter-btn" onclick="filterProjects('content',this)">Content</button>
+      <button class="filter-btn" onclick="filterProjects('community',this)">Community</button>
+    </div>
+    <div class="projects-grid">
+      <div class="glass-card project-card reveal" data-cat="cricket" style="transition-delay:.1s">
+        <div class="project-header">
+          <span class="project-tag">Cricket</span>
+          <div class="project-arrow">↗</div>
+        </div>
+        <div class="project-img">
+          <div class="project-img-bg"></div>
+          <span style="position:relative;z-index:1;font-size:3rem">🏏</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">IPL Breakdown Series</div>
+          <div class="project-desc">Deep-dive analysis reels breaking down every IPL match — from key moments to player stats that tell the real story.</div>
+        </div>
+      </div>
+      <div class="glass-card project-card reveal" data-cat="content" style="transition-delay:.2s">
+        <div class="project-header">
+          <span class="project-tag">Content</span>
+          <div class="project-arrow">↗</div>
+        </div>
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(0,245,255,.12),rgba(108,99,255,.12))">
+          <div class="project-img-bg"></div>
+          <span style="position:relative;z-index:1;font-size:3rem">🔥</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Viral Fact Reels</div>
+          <div class="project-desc">Short-form fact videos that consistently hit 1M+ views by delivering cricket knowledge in the most engaging formats possible.</div>
+        </div>
+      </div>
+      <div class="glass-card project-card reveal" data-cat="community" style="transition-delay:.3s">
+        <div class="project-header">
+          <span class="project-tag">Community</span>
+          <div class="project-arrow">↗</div>
+        </div>
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(108,99,255,.1))">
+          <div class="project-img-bg"></div>
+          <span style="position:relative;z-index:1;font-size:3rem">🏆</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Cricket Fan Polls</div>
+          <div class="project-desc">Interactive polls and debates that bring the community together — generating hundreds of thousands of votes and meaningful discussions.</div>
+        </div>
+      </div>
+      <div class="glass-card project-card reveal" data-cat="cricket" style="transition-delay:.4s">
+        <div class="project-header">
+          <span class="project-tag">Cricket</span>
+          <div class="project-arrow">↗</div>
+        </div>
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(108,99,255,.15),rgba(255,215,0,.08))">
+          <div class="project-img-bg"></div>
+          <span style="position:relative;z-index:1;font-size:3rem">📊</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Records & Legends</div>
+          <div class="project-desc">A definitive series celebrating cricket's greatest records and the legends who made history — delivered with passion and precision.</div>
+        </div>
+      </div>
+      <div class="glass-card project-card reveal" data-cat="content" style="transition-delay:.5s">
+        <div class="project-header">
+          <span class="project-tag">Content</span>
+          <div class="project-arrow">↗</div>
+        </div>
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(0,245,255,.08),rgba(255,215,0,.12))">
+          <div class="project-img-bg"></div>
+          <span style="position:relative;z-index:1;font-size:3rem">🎙️</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Daily Cricket Bytes</div>
+          <div class="project-desc">A daily content series that keeps the community up to date with the latest cricket news, match previews, and post-match analyses.</div>
+        </div>
+      </div>
+      <div class="glass-card project-card reveal" data-cat="community" style="transition-delay:.6s">
+        <div class="project-header">
+          <span class="project-tag">Community</span>
+          <div class="project-arrow">↗</div>
+        </div>
+        <div class="project-img" style="background:linear-gradient(135deg,rgba(108,99,255,.08),rgba(0,245,255,.18))">
+          <div class="project-img-bg"></div>
+          <span style="position:relative;z-index:1;font-size:3rem">👑</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Fan of the Month</div>
+          <div class="project-desc">A community-driven spotlight that celebrates the most passionate cricket fans — turning followers into the heart of the Factlust story.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ COMMUNITY ============================================================ -->
+<section id="community">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <div class="section-tag">// Community</div>
+      <div class="divider" style="margin:1rem auto 1.5rem"></div>
+      <h2 class="section-heading">The Factlust Family</h2>
+      <p class="section-sub" style="margin:0 auto">A global community united by cricket passion and digital curiosity.</p>
+    </div>
+    <div class="community-hero-card reveal" style="margin-top:3rem">
+      <div class="community-big-num" data-target="120">0</div>
+      <div class="community-big-label">Thousand+ Community Members &amp; Growing</div>
+      <div class="hero-buttons" style="opacity:1;transform:none">
+        <button class="btn-primary" onclick="window.open('https://www.instagram.com/factlustt','_blank','noopener,noreferrer')">
+          <span>Join the Community ↗</span>
+        </button>
+      </div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="glass-card testimonial-card reveal" style="transition-delay:.1s">
+        <div class="t-text">Arya's cricket content is genuinely the best on the internet. Every reel teaches me something new. The passion behind Factlust is unmatched!</div>
+        <div class="t-author">
+          <div class="t-avatar">🏏</div>
+          <div>
+            <div class="t-name">Rohan M.</div>
+            <div class="t-handle">@cricket_rohan</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card testimonial-card reveal" style="transition-delay:.2s">
+        <div class="t-text">I've been following Factlust for 2 years and the quality just keeps getting better. The way Arya breaks down complex stats is truly next level!</div>
+        <div class="t-author">
+          <div class="t-avatar">⭐</div>
+          <div>
+            <div class="t-name">Priya S.</div>
+            <div class="t-handle">@priya_sports</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card testimonial-card reveal" style="transition-delay:.3s">
+        <div class="t-text">The community polls and debates are so engaging! Factlust doesn't just post content — it creates conversations that bring cricket fans together.</div>
+        <div class="t-author">
+          <div class="t-avatar">🔥</div>
+          <div>
+            <div class="t-name">Karan T.</div>
+            <div class="t-handle">@karantalks</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="social-proof-row">
+      <div class="glass-card social-proof-card reveal" style="transition-delay:.1s">
+        <div class="sp-icon">📱</div>
+        <div>
+          <div class="sp-num" data-target="120">0</div>
+          <div class="sp-label">Instagram Followers</div>
+        </div>
+      </div>
+      <div class="glass-card social-proof-card reveal" style="transition-delay:.2s">
+        <div class="sp-icon">👁️</div>
+        <div>
+          <div class="sp-num" data-target="8">0</div>
+          <div class="sp-label">Million+ Views</div>
+        </div>
+      </div>
+      <div class="glass-card social-proof-card reveal" style="transition-delay:.3s">
+        <div class="sp-icon">❤️</div>
+        <div>
+          <div class="sp-num" data-target="500">0</div>
+          <div class="sp-label">K+ Total Likes</div>
+        </div>
+      </div>
+      <div class="glass-card social-proof-card reveal" style="transition-delay:.4s">
+        <div class="sp-icon">🌍</div>
+        <div>
+          <div class="sp-num" data-target="47">0</div>
+          <div class="sp-label">Countries Reached</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CHANNEL CTA ============================================================ -->
+<section id="cta-channel">
+  <div class="cta-inner">
+    <div class="cta-rocket">🚀</div>
+    <h2 class="cta-heading reveal">Join My Community</h2>
+    <p class="cta-sub reveal">Be part of the fastest-growing cricket &amp; content community. New posts, exclusive insights, and real conversations — every single day.</p>
+    <div class="reveal">
+      <button class="btn-channel" onclick="window.open('https://www.instagram.com/factlustt','_blank','noopener,noreferrer')">
+        <span class="icon">📸</span>
+        <span>Visit My Official Channel</span>
+      </button>
+      <div class="channel-meta">
+        Follow on Instagram &nbsp;·&nbsp; <a href="https://www.instagram.com/factlustt" target="_blank" rel="noopener noreferrer">@factlustt</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ WHAT'S COMING ============================================================ -->
+<section id="whats-coming">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">// Future</div>
+      <div class="divider"></div>
+      <h2 class="section-heading">What's Coming Next?</h2>
+      <p class="section-sub">The Factlust universe is expanding. Here's a glimpse at what's on the horizon.</p>
+    </div>
+    <div class="coming-grid">
+      <div class="glass-card coming-card reveal" style="transition-delay:.1s">
+        <div class="coming-icon">🎥</div>
+        <div class="coming-title">Long-Form Content</div>
+        <div class="coming-desc">Detailed documentaries, deep-dive analyses, and extended cricket breakdowns that go beyond the reel format — for those who want more.</div>
+        <div class="coming-badge">Coming Soon</div>
+      </div>
+      <div class="glass-card coming-card reveal" style="transition-delay:.2s">
+        <div class="coming-icon">🤝</div>
+        <div class="coming-title">Creator Collabs</div>
+        <div class="coming-desc">Exciting partnerships with top cricket creators and sports personalities to bring fresh perspectives and unique content to the community.</div>
+        <div class="coming-badge">In Progress</div>
+      </div>
+      <div class="glass-card coming-card reveal" style="transition-delay:.3s">
+        <div class="coming-icon">🏆</div>
+        <div class="coming-title">Community Tournaments</div>
+        <div class="coming-desc">Online cricket quiz tournaments, prediction leagues, and fan challenges with prizes and exclusive Factlust recognition for top players.</div>
+        <div class="coming-badge">Planned</div>
+      </div>
+      <div class="glass-card coming-card reveal" style="transition-delay:.4s">
+        <div class="coming-icon">📲</div>
+        <div class="coming-title">Exclusive Membership</div>
+        <div class="coming-desc">A premium members-only tier with early content access, behind-the-scenes footage, Q&A sessions, and direct conversations with Arya.</div>
+        <div class="coming-badge">Coming 2026</div>
+      </div>
+    </div>
+    <div class="coming-banner reveal">
+      <p><strong>More exciting updates are coming soon.</strong> Stay connected and check back regularly for new features and content. The best is truly yet to come for the Factlust community. 🌟</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONTACT ============================================================ -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center; margin-bottom:3rem">
+      <div class="section-tag">// Get In Touch</div>
+      <div class="divider" style="margin:1rem auto 1.5rem"></div>
+      <h2 class="section-heading">Let's Connect</h2>
+      <p class="section-sub" style="margin:0 auto">For collabs, brand partnerships, or just to say hey — reach out anytime.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <div class="contact-info">
+          <h3>Always Open for Great Conversations</h3>
+          <p>Whether you're a brand looking to collaborate, a fellow creator wanting to connect, or a cricket fan with a great idea — my inbox is open.</p>
+          <div class="contact-links">
+            <a class="contact-link-item" href="https://www.instagram.com/factlustt" target="_blank" rel="noopener noreferrer">
+              <span class="cl-icon">📸</span>
+              <div>
+                <div class="cl-text-label">Instagram</div>
+                <div class="cl-text-val">@factlustt</div>
+              </div>
+            </a>
+            <div class="contact-link-item">
+              <span class="cl-icon">📍</span>
+              <div>
+                <div class="cl-text-label">Based In</div>
+                <div class="cl-text-val">India 🇮🇳</div>
+              </div>
+            </div>
+            <div class="contact-link-item">
+              <span class="cl-icon">🎯</span>
+              <div>
+                <div class="cl-text-label">Niche</div>
+                <div class="cl-text-val">Cricket · Content · Innovation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="glass-card" style="padding:36px">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="Your name" required autocomplete="given-name">
+              </div>
+              <div class="form-field">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" placeholder="Last name" autocomplete="family-name">
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Collaboration / Partnership / Hello">
+            </div>
+            <div class="form-field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your idea..." required maxlength="2000"></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message →</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            ✅ Message sent! I'll get back to you soon.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Arya.</div>
+        <div class="footer-tagline">Creator, Cricket Enthusiast &amp; Digital Innovator building authentic connections through passion-driven content.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="https://www.instagram.com/factlustt" target="_blank" rel="noopener noreferrer" aria-label="Instagram">📸</a>
+          <a class="footer-social" href="#" aria-label="YouTube">▶️</a>
+          <a class="footer-social" href="#" aria-label="Twitter">🐦</a>
+          <a class="footer-social" href="#" aria-label="Telegram">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Content</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/factlustt" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#whats-coming">What's Coming</a></li>
+          <li><a href="#contact">Collabs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://www.instagram.com/factlustt" target="_blank" rel="noopener noreferrer">@factlustt</a></li>
+          <li><a href="#cta-channel">Join Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Arya · Factlust. All rights reserved.</div>
+      <div class="footer-love">Made with <span>❤️</span> &amp; Cricket passion</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ SCRIPTS ============================================================ -->
+<script>
+// ============================================================
+// SECURITY: CSP-safe, no eval, no innerHTML with user data
+// ============================================================
+
+// ----- Page Loader -----
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('page-loader');
+    if (loader) { loader.classList.add('hidden'); }
+  }, 1600);
+});
+
+// ----- Custom Cursor -----
+(function() {
+  const outer = document.getElementById('cursor-outer');
+  const inner = document.getElementById('cursor-inner');
+  let mx = -100, my = -100, ox = -100, oy = -100;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  const links = document.querySelectorAll('a, button');
+  links.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      outer.style.width = '56px'; outer.style.height = '56px';
+      outer.style.borderColor = 'var(--indigo)';
+      outer.style.background = 'rgba(108,99,255,0.1)';
+    });
+    el.addEventListener('mouseleave', () => {
+      outer.style.width = '40px'; outer.style.height = '40px';
+      outer.style.borderColor = 'var(--cyan)';
+      outer.style.background = 'transparent';
+    });
+  });
+  function animateCursor() {
+    ox += (mx - ox) * 0.18;
+    oy += (my - oy) * 0.18;
+    outer.style.left = ox + 'px'; outer.style.top = oy + 'px';
+    inner.style.left = mx + 'px'; inner.style.top = my + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+})();
+
+// ----- Mouse Glow -----
+(function() {
+  const glow = document.getElementById('mouse-glow');
+  let gx = -500, gy = -500;
+  document.addEventListener('mousemove', e => { gx = e.clientX; gy = e.clientY; });
+  function animateGlow() {
+    glow.style.left = gx + 'px'; glow.style.top = gy + 'px';
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
+})();
+
+// ----- Navbar scroll -----
+(function() {
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+})();
+
+// ----- Mobile Menu -----
+(function() {
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+  const close = document.getElementById('menuClose');
+  hamburger.addEventListener('click', () => menu.classList.add('open'));
+  close.addEventListener('click', () => menu.classList.remove('open'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+})();
+
+// ----- Typing Animation -----
+(function() {
+  const phrases = [
+    'Cricket analytics 🏏',
+    'viral content creation 🎬',
+    'digital storytelling ✨',
+    'building communities 👥',
+    'breaking records 🏆'
+  ];
+  const el = document.getElementById('typing-text');
+  if (!el) return;
+  let pi = 0, ci = 0, deleting = false;
+  function type() {
+    const phrase = phrases[pi];
+    el.textContent = deleting ? phrase.substring(0, ci--) : phrase.substring(0, ci++);
+    let delay = deleting ? 45 : 80;
+    if (!deleting && ci === phrase.length + 1) { delay = 2000; deleting = true; }
+    else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 400; }
+    setTimeout(type, delay);
+  }
+  setTimeout(type, 1800);
+})();
+
+// ----- Particle Canvas (cricket ball + stars) -----
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], mouse = { x: -999, y: -999 };
+  function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  document.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  }, { passive: true });
+  // Types: 'dot', 'ball'
+  for (let i = 0; i < 120; i++) {
+    particles.push({
+      x: Math.random() * 1200, y: Math.random() * 800,
+      r: Math.random() * 1.8 + 0.4,
+      vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
+      a: Math.random(), type: 'dot',
+      color: Math.random() < .5 ? '#6C63FF' : '#00F5FF'
+    });
+  }
+  for (let i = 0; i < 8; i++) {
+    particles.push({
+      x: Math.random() * 1200, y: Math.random() * 800,
+      r: Math.random() * 5 + 4,
+      vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18,
+      a: Math.random() * .5 + .3, type: 'ball',
+      color: '#cc3333'
+    });
+  }
+  function drawBall(p) {
+    ctx.save();
+    ctx.globalAlpha = p.a;
+    const g = ctx.createRadialGradient(p.x - p.r*.3, p.y - p.r*.3, 0, p.x, p.y, p.r);
+    g.addColorStop(0, '#ff6666'); g.addColorStop(1, '#880000');
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = g; ctx.fill();
+    // seam
+    ctx.strokeStyle = 'rgba(255,200,200,0.6)'; ctx.lineWidth = .8;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r * .75, .3, Math.PI - .3);
+    ctx.stroke();
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r * .75, Math.PI + .3, -.3 + Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+  }
+  function anim() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      // mouse repulsion
+      const dx = p.x - mouse.x, dy = p.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        const force = (120 - dist) / 120 * .6;
+        p.vx += (dx / dist) * force * .04;
+        p.vy += (dy / dist) * force * .04;
+      }
+      p.vx *= .98; p.vy *= .98;
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -p.r * 2) p.x = W + p.r;
+      if (p.x > W + p.r * 2) p.x = -p.r;
+      if (p.y < -p.r * 2) p.y = H + p.r;
+      if (p.y > H + p.r * 2) p.y = -p.r;
+      if (p.type === 'ball') { drawBall(p); return; }
+      ctx.save();
+      ctx.globalAlpha = p.a * .7;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color; ctx.fill();
+      ctx.restore();
+    });
+    // Connect nearby dots
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        if (a.type === 'ball' || b.type === 'ball') continue;
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 100) {
+          ctx.save();
+          ctx.globalAlpha = (1 - d/100) * .15;
+          ctx.strokeStyle = '#6C63FF'; ctx.lineWidth = .5;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+    requestAnimationFrame(anim);
+  }
+  anim();
+})();
+
+// ----- Scroll Reveal -----
+(function() {
+  const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+})();
+
+// ----- Skill Bars -----
+(function() {
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.width + '%';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: .3 });
+  bars.forEach(b => io.observe(b));
+})();
+
+// ----- Counter Animation -----
+(function() {
+  const counters = document.querySelectorAll('[data-target]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      let current = 0;
+      const step = target / 60;
+      const tick = () => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current) + (current >= target ? (target >= 100 ? 'K+' : target >= 10 ? 'M+' : '+') : '');
+        if (current < target) requestAnimationFrame(tick);
+        else el.textContent = target + (target >= 100 ? 'K+' : target >= 10 ? 'M+' : '+');
+      };
+      tick();
+      io.unobserve(el);
+    });
+  }, { threshold: .5 });
+  counters.forEach(c => io.observe(c));
+})();
+
+// ----- Project Filter -----
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.transition = 'opacity .4s ease, transform .4s ease';
+    card.style.opacity = show ? '1' : '0.15';
+    card.style.transform = show ? '' : 'scale(0.96)';
+    card.style.pointerEvents = show ? '' : 'none';
+  });
+}
+
+// ----- Contact Form -----
+(function() {
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !email || !message) return;
+    // Sanitize: just display, no eval/innerHTML with user data
+    form.style.display = 'none';
+    success.style.display = 'block';
+  });
+})();
+
+// ----- Parallax (hero) -----
+(function() {
+  const hero = document.getElementById('hero');
+  if (!hero) return;
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    if (sy < window.innerHeight) {
+      hero.style.transform = 'translateY(' + sy * .3 + 'px)';
+    }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
